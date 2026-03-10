@@ -1,0 +1,284 @@
+{
+  "timestamp": "2026-03-10 20:00:46",
+  "corpus_size": 992,
+  "queries": 8,
+  "summary": {
+    "void_memory": {
+      "avg_relevance": 0.8417,
+      "avg_latency_ms": 62.2,
+      "avg_tokens": 292,
+      "avg_noise_hits": 0.0,
+      "queries": 8
+    },
+    "simple_rag": {
+      "avg_relevance": 0.1054,
+      "avg_latency_ms": 21.8,
+      "avg_tokens": 226,
+      "avg_noise_hits": 0.0,
+      "queries": 8
+    },
+    "naive_stuffing": {
+      "avg_relevance": 0.2368,
+      "avg_latency_ms": 0.1,
+      "avg_tokens": 44621,
+      "avg_noise_hits": 0.6,
+      "queries": 8
+    }
+  },
+  "detailed": {
+    "void_memory": [
+      {
+        "relevance": 0.8333,
+        "expected_hits": 5,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 281,
+        "latency_ms": 61.7,
+        "method": "void_memory"
+      },
+      {
+        "relevance": 1.0,
+        "expected_hits": 7,
+        "expected_total": 7,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 307,
+        "latency_ms": 53.8,
+        "method": "void_memory"
+      },
+      {
+        "relevance": 0.8,
+        "expected_hits": 4,
+        "expected_total": 5,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 243,
+        "latency_ms": 64.0,
+        "method": "void_memory"
+      },
+      {
+        "relevance": 0.5,
+        "expected_hits": 3,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 353,
+        "latency_ms": 75.7,
+        "method": "void_memory"
+      },
+      {
+        "relevance": 1.0,
+        "expected_hits": 6,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 286,
+        "latency_ms": 67.5,
+        "method": "void_memory"
+      },
+      {
+        "relevance": 1.0,
+        "expected_hits": 6,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 300,
+        "latency_ms": 48.6,
+        "method": "void_memory"
+      },
+      {
+        "relevance": 0.6,
+        "expected_hits": 3,
+        "expected_total": 5,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 278,
+        "latency_ms": 75.7,
+        "method": "void_memory"
+      },
+      {
+        "relevance": 1.0,
+        "expected_hits": 6,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 285,
+        "latency_ms": 50.5,
+        "method": "void_memory"
+      }
+    ],
+    "simple_rag": [
+      {
+        "relevance": 0,
+        "expected_hits": 0,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 118,
+        "latency_ms": 67.3,
+        "method": "simple_rag",
+        "top_k": 10
+      },
+      {
+        "relevance": 0.1429,
+        "expected_hits": 1,
+        "expected_total": 7,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 163,
+        "latency_ms": 13.9,
+        "method": "simple_rag",
+        "top_k": 10
+      },
+      {
+        "relevance": 0.2,
+        "expected_hits": 1,
+        "expected_total": 5,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 583,
+        "latency_ms": 16.2,
+        "method": "simple_rag",
+        "top_k": 10
+      },
+      {
+        "relevance": 0,
+        "expected_hits": 0,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 118,
+        "latency_ms": 16.2,
+        "method": "simple_rag",
+        "top_k": 10
+      },
+      {
+        "relevance": 0,
+        "expected_hits": 0,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 118,
+        "latency_ms": 17.4,
+        "method": "simple_rag",
+        "top_k": 10
+      },
+      {
+        "relevance": 0,
+        "expected_hits": 0,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 118,
+        "latency_ms": 14.9,
+        "method": "simple_rag",
+        "top_k": 10
+      },
+      {
+        "relevance": 0,
+        "expected_hits": 0,
+        "expected_total": 5,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 118,
+        "latency_ms": 14.2,
+        "method": "simple_rag",
+        "top_k": 10
+      },
+      {
+        "relevance": 0.5,
+        "expected_hits": 3,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 472,
+        "latency_ms": 14.2,
+        "method": "simple_rag",
+        "top_k": 10
+      }
+    ],
+    "naive_stuffing": [
+      {
+        "relevance": 0.1667,
+        "expected_hits": 1,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 44621,
+        "latency_ms": 0.4,
+        "method": "naive_stuffing"
+      },
+      {
+        "relevance": 0.2857,
+        "expected_hits": 2,
+        "expected_total": 7,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 44621,
+        "latency_ms": 0.1,
+        "method": "naive_stuffing"
+      },
+      {
+        "relevance": 0.2,
+        "expected_hits": 1,
+        "expected_total": 5,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 44621,
+        "latency_ms": 0.1,
+        "method": "naive_stuffing"
+      },
+      {
+        "relevance": 0.0833,
+        "expected_hits": 2,
+        "expected_total": 6,
+        "noise_hits": 2,
+        "noise_total": 4,
+        "token_count": 44621,
+        "latency_ms": 0.1,
+        "method": "naive_stuffing"
+      },
+      {
+        "relevance": 0.1667,
+        "expected_hits": 1,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 44621,
+        "latency_ms": 0.1,
+        "method": "naive_stuffing"
+      },
+      {
+        "relevance": 0.3333,
+        "expected_hits": 2,
+        "expected_total": 6,
+        "noise_hits": 0,
+        "noise_total": 4,
+        "token_count": 44621,
+        "latency_ms": 0.1,
+        "method": "naive_stuffing"
+      },
+      {
+        "relevance": 0.075,
+        "expected_hits": 1,
+        "expected_total": 5,
+        "noise_hits": 1,
+        "noise_total": 4,
+        "token_count": 44621,
+        "latency_ms": 0.1,
+        "method": "naive_stuffing"
+      },
+      {
+        "relevance": 0.5833,
+        "expected_hits": 5,
+        "expected_total": 6,
+        "noise_hits": 2,
+        "noise_total": 4,
+        "token_count": 44621,
+        "latency_ms": 0.1,
+        "method": "naive_stuffing"
+      }
+    ]
+  }
+}

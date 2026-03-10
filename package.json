@@ -1,0 +1,43 @@
+{
+  "name": "void-memory",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Three-state memory system for AI agents. 30% structural void creates interference-free recall. Sub-10ms, zero dependencies beyond SQLite.",
+  "main": "dist/mcp-server.js",
+  "bin": {
+    "void-memory": "dist/mcp-server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/mcp-server.js",
+    "dashboard": "node dist/dashboard.js"
+  },
+  "keywords": [
+    "memory",
+    "ai-agent",
+    "mcp",
+    "claude-code",
+    "ternary",
+    "void",
+    "recall",
+    "llm",
+    "context-management"
+  ],
+  "author": "Gavin Saunders",
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nextlevelbuilder/void-memory"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.6.2"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^25.4.0",
+    "typescript": "^5.9.3"
+  }
+}

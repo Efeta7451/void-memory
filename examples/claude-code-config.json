@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "void-memory": {
+      "command": "node",
+      "args": ["node_modules/void-memory/dist/mcp-server.js"],
+      "env": {
+        "VOID_DATA_DIR": "./memory"
+      }
+    }
+  }
+}
