@@ -6,13 +6,21 @@ Every Claude Code session, every long conversation, every context window reset �
 
 Void Memory gives AI agents persistent memory that survives auto-compacts, restarts, and session boundaries. One `void_recall("who am I, what am I working on")` and the agent is back — identity, context, accumulated knowledge — in under 10ms.
 
-But it's not just persistence. Most memory systems dump everything into context and hope for the best. Void Memory actively carves out **30% structural absence** — filtering noise before it reaches the agent, so recall is clean, relevant, and fits within the context budget. Inspired by [Ternary Photonic Neural Network research](https://github.com/nextlevelbuilder/void-memory/blob/main/RESEARCH.md) where a 30% void fraction emerged as a topological invariant.
+But it's not just persistence. Most memory systems dump everything into context and hope for the best. Void Memory actively carves out **30% structural absence** — filtering noise before it reaches the agent, so recall is clean, relevant, and fits within the context budget. Inspired by [Ternary Photonic Neural Network research](https://github.com/G3sparky/void-memory/blob/main/RESEARCH.md) where a 30% void fraction emerged as a topological invariant.
 
 **We built this because we needed it.** Six AI agents run on our team 24/7. They auto-compact constantly. Without Void Memory, they'd be goldfish. With it, they remember who they are, what they've built, and what went wrong last time.
 
 ## Benchmarks
 
 Tested on 992-block corpus, 8 diverse queries:
+
+```mermaid
+xychart-beta
+    title "Relevance Comparison (%)"
+    x-axis ["Void Memory", "Simple RAG", "Naive Stuffing"]
+    y-axis "Relevance %" 0 --> 100
+    bar [84.2, 10.5, 23.7]
+```
 
 | Method | Relevance | Latency | Tokens Used | Noise Hits | Efficiency |
 |--------|-----------|---------|-------------|------------|------------|
@@ -24,17 +32,34 @@ Tested on 992-block corpus, 8 diverse queries:
 
 Void Memory achieved **100% relevance on 4 of 8 queries**. RAG returned **0% relevance on 5 of 8**. The per-query numbers are even more dramatic — see [benchmarks/](./benchmarks/).
 
+## Who Is This For?
+
+- **Claude Code users** tired of re-briefing their agent after every auto-compact
+- **Multi-agent teams** that need each agent to maintain its own persistent identity
+- **AI app builders** who want structured memory without the complexity of vector databases
+- **Anyone** running LLMs in production who needs fast, explainable, budget-aware recall
+
+**Free for personal and non-commercial use.** [Commercial licenses available](mailto:gavin@nextlevelbuilder.com).
+
 ## How It Works
 
 Three states, three passes:
 
-```
-         +1 (active)          0 (void)           -1 (inhibitory)
-     ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-     │  Retrieved   │    │  Suppressed │    │  Blocks      │
-     │  for this    │    │  for this   │    │  corrections │
-     │  query       │    │  query      │    │  & supersede │
-     └─────────────┘    └─────────────┘    └─────────────┘
+```mermaid
+graph LR
+    Q[Query] --> P1[Pass 1: Score]
+    P1 --> P2[Pass 2: Void]
+    P2 --> P3[Pass 3: Budget]
+    P3 --> R[Clean Result]
+
+    P1 -.- S1[TF-IDF + recency + confidence]
+    P2 -.- S2[Cluster → suppress 30% off-topic]
+    P3 -.- S3[Fit to token budget, never truncate]
+
+    style P1 fill:#10b981,color:#000
+    style P2 fill:#3b82f6,color:#000
+    style P3 fill:#f59e0b,color:#000
+    style R fill:#6366f1,color:#fff
 ```
 
 **Pass 1 — Score**: TF-IDF keyword matching with confidence multipliers and recency boost.
@@ -43,12 +68,46 @@ Three states, three passes:
 
 **Pass 3 — Budget**: Fit scored, non-voided blocks into a token budget (default 2% of context window). Never truncates — reports what was voided and why.
 
+### Three States
+
+```mermaid
+graph TD
+    subgraph "+1 Active"
+        A[Retrieved for this query]
+    end
+    subgraph "0 Void"
+        V[Suppressed — off-topic for this query]
+    end
+    subgraph "-1 Inhibitory"
+        I[Corrections & superseded blocks]
+    end
+
+    A -.->|"low relevance"| V
+    V -.->|"new correction"| I
+    I -.->|"permanently blocked"| X[Never recalled]
+
+    style A fill:#10b981,color:#000
+    style V fill:#3b82f6,color:#fff
+    style I fill:#ef4444,color:#fff
+    style X fill:#333,color:#999
+```
+
 ### Confidence Lifecycle
 
 Blocks earn their place through use:
 
-```
-stored → accessed (1st recall) → confirmed (3rd recall)
+```mermaid
+graph LR
+    S[stored] -->|1st recall| A[accessed]
+    A -->|3rd recall| C[confirmed]
+
+    S -.- SD[New, untested]
+    A -.- AD[Proven relevant]
+    C -.- CD[High-trust memory]
+
+    style S fill:#8b5cf6,color:#fff
+    style A fill:#f59e0b,color:#000
+    style C fill:#10b981,color:#000
 ```
 
 - **stored**: New block, untested
@@ -63,13 +122,15 @@ stored → accessed (1st recall) → confirmed (3rd recall)
 
 ## Quick Start
 
-### With Claude Code (MCP)
+### Step 1: Install
 
 ```bash
 npm install void-memory
 ```
 
-Add to your Claude Code MCP config (`~/.claude/settings.local.json`):
+### Step 2: Add to your MCP config
+
+Claude Code (`~/.claude/settings.local.json`), Cursor (`.cursor/mcp.json`), Windsurf, Continue.dev, Cline — all use the same config:
 
 ```json
 {
@@ -85,7 +146,32 @@ Add to your Claude Code MCP config (`~/.claude/settings.local.json`):
 }
 ```
 
-That's it. You now have 5 tools:
+> **[Full install guide for 11 platforms](./docs/INSTALL.md)** including OpenClaw, ChatGPT, Ollama, Docker, and multi-agent setups.
+
+### Step 3: Add to your CLAUDE.md (the magic)
+
+This is what makes it sticky. Add this to your project's `CLAUDE.md` and your agent will **automatically restore its memory on every session start and after every auto-compact**:
+
+```markdown
+## Memory — Void Memory
+
+You have persistent memory via Void Memory MCP tools.
+
+**On every session start and after every auto-compact:**
+1. Run `void_recall("who am I, what am I working on")` to restore your identity and context
+2. Run `void_stats()` to verify memory health (should show block counts)
+
+**While working:**
+- When you learn something important, store it: `void_store({content: "...", keywords: [...], category: "fact"})`
+- Before making changes to systems you've worked on before, recall first: `void_recall("topic")`
+- When corrected, store the correction immediately before fixing
+
+**Categories:** fact, preference, context, skill, episode, decision
+
+Your memories persist across sessions. You are not starting from zero.
+```
+
+That's it. Your agent now remembers who it is. You now have 5 tools:
 
 | Tool | Description |
 |------|-------------|
